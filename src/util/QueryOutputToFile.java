@@ -118,7 +118,7 @@ public class QueryOutputToFile
 								byte[] ba = rs.getBytes(i);
 								if (ba != null)
 								{
-									line.append("\"" + StringUtil.encodeForCSVStorage(new String(ba,UTF16)) + "\",");
+									line.append("\"" + CSVUtil.encodeForCSVStorage(new String(ba,UTF16)) + "\",");
 								}
 								else
 									line.append(",");
@@ -128,7 +128,7 @@ public class QueryOutputToFile
 								byte[] vba = rs.getBytes(i);
 								if (vba != null)
 								{
-									line.append("\"" + StringUtil.encodeForCSVStorage(new String(vba,UTF16)) + "\",");
+									line.append("\"" + CSVUtil.encodeForCSVStorage(new String(vba,UTF16)) + "\",");
 								}
 								else
 									line.append(",");
@@ -139,7 +139,7 @@ public class QueryOutputToFile
 								if (is != null)
 								{
 									Reader streamReader = new InputStreamReader(is, UTF16);
-									line.append("\"" + StringUtil.encodeForCSVStorage(IOUtil.ReaderToString(streamReader)) + "\",");
+									line.append("\"" + CSVUtil.encodeForCSVStorage(IOUtil.ReaderToString(streamReader)) + "\",");
 								}
 								else
 								{
@@ -157,7 +157,7 @@ public class QueryOutputToFile
 										
 										InputStream blobIs = blob.getBinaryStream();
 										Reader streamReader = new InputStreamReader(blobIs, UTF16);
-										line.append("\"" + StringUtil.encodeForCSVStorage(IOUtil.ReaderToString(streamReader)) + "\",");
+										line.append("\"" + CSVUtil.encodeForCSVStorage(IOUtil.ReaderToString(streamReader)) + "\",");
 									}
 									finally
 									{
@@ -177,7 +177,7 @@ public class QueryOutputToFile
 								if (cs != null)
 								{
 									
-									line.append("\"" + StringUtil.encodeForCSVStorage(IOUtil.ReaderToString(cs)) + "\",");
+									line.append("\"" + CSVUtil.encodeForCSVStorage(IOUtil.ReaderToString(cs)) + "\",");
 								}
 								else
 								{
@@ -194,7 +194,7 @@ public class QueryOutputToFile
 										
 										Reader clobIs = clob.getCharacterStream();
 										
-										line.append("\"" + StringUtil.encodeForCSVStorage(IOUtil.ReaderToString(clobIs)) + "\",");
+										line.append("\"" + CSVUtil.encodeForCSVStorage(IOUtil.ReaderToString(clobIs)) + "\",");
 									}
 									else
 									{
@@ -214,7 +214,7 @@ public class QueryOutputToFile
 							default:
 								String ds = rs.getString(i);
 								if (ds != null && ds.length() > 0)
-									line.append("\"" + StringUtil.encodeForCSVStorage(rs.getString(i)) + "\",");
+									line.append("\"" + CSVUtil.encodeForCSVStorage(rs.getString(i)) + "\",");
 								else
 									line.append(",");
 								break;
@@ -281,7 +281,7 @@ public class QueryOutputToFile
 	
 }
 
-class StringUtil
+class CSVUtil
 {
 	public static String encodeForCSVStorage(String string)
 	{

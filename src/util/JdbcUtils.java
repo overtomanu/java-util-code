@@ -36,7 +36,7 @@ public class JdbcUtils {
 				stmt += "?,";
 			}
 		}
-		stmt = stmt.substring(0, stmt.length() - 1);
+		if (stmt.endsWith(",")) { stmt = stmt.substring(0, stmt.length() - 1); }
 		stmt += ")}";
 
 		if (printLog) {
