@@ -134,6 +134,26 @@ public class JdbcUtils {
 		return null;
 	}
 
+	public static int executeSingleDMLQuery(Connection connection, String query)
+			throws SQLException {
+		System.out.println("executeSingleDMLQuery entry:query:" + query);
+		Statement opstmt = null;
+		try {
+			opstmt = connection.createStatement();
+			int result = opstmt.executeUpdate(query);
+			System.out.println("Result:" + result);
+			return result;
+		} finally {
+			try {
+				if (opstmt != null)
+					opstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace(System.out);
+			}
+			System.out.println("executeSingleDMLQuery exit");
+		}
+	}
+
 	public static Long getNextValOfSequence(Connection connection, String dbSequenceName) throws SQLException {
 		String stmt = "SELECT " + dbSequenceName + ".NEXTVAL as seq_nxt_val from dual";
 		PreparedStatement pstmt = connection.prepareCall(stmt);
